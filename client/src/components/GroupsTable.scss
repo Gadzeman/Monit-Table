@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.table {
+  margin-top: 30px;
+  &__header {
+    background: #093460;
+    th {
+      color: white;
+      padding: 11px 17px;
+    }
+  }
+  &__task {
+    &__name {
+      padding: 3px;
+      margin: 2px 0;
+    }
+    &__status {
+      &__style {
+        text-align: center;
+        width: 120px;
+        padding: 3px 0;
+        margin: 2px 0;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+      &__created {
+        color: green;
+        background: #c9efc9;
+      }
+      &__creating {
+        color: #ad7100;
+        background: #ffe7c3;
+      }
+      &__failed {
+        color: red;
+        background: #ffafaf;
+      }
+    }
+    &__date {
+      padding: 3px 0;
+      margin: 2px 0;
+    }
+  }
+}
