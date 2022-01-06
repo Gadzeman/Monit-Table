@@ -1,5 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper } from "@mui/material";
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper } from "@material-ui/core";
+
 import './GroupsTable.scss'
 import { getGroups } from '../requests/groups.request'
 import { getUsersUrl } from "../config/variables";
@@ -40,8 +41,8 @@ const GroupsTable: FC = () => {
     }
 
     return (
-        <TableContainer className={'table'} sx={{ maxWidth: 1100 }} component={Paper}>
-            <Table sx={{ minWidth: 900 }}>
+        <TableContainer className={'table'} component={Paper}>
+            <Table>
                 <TableHead>
                     <TableRow className={'table__header'}>
                         <TableCell>Group</TableCell>
@@ -58,7 +59,7 @@ const GroupsTable: FC = () => {
                             <TableRow key={ task._id }>
                                 <TableCell>{ group.name }</TableCell>
                                 <TableCell>{ task.name }</TableCell>
-                                <TableCell><p className={getClassName(task.status)}>{ task.status }</p></TableCell>
+                                <TableCell><p className={getClassName(task.status)}>{ task.status === null ? '...' : task.status }</p></TableCell>
                                 <TableCell>{ task.last_download }</TableCell>
                                 <TableCell>{ task.last_check }</TableCell>
                                 <TableCell>{ task.expected_refresh_date }</TableCell>
