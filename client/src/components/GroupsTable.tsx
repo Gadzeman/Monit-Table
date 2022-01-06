@@ -42,7 +42,7 @@ const GroupsTable: FC = () => {
 
     return (
         <TableContainer className={'table'}>
-            <Table>
+            <Table style={{ minWidth: '940px' }}>
                 <TableHead>
                     <TableRow className={'table__header'}>
                         <TableCell>Group</TableCell>
@@ -58,7 +58,7 @@ const GroupsTable: FC = () => {
                         groups.map(group => group.tasks.map(task => (
                             <TableRow key={ task._id } className={'table__body'}>
                                 <TableCell>{ group.name }</TableCell>
-                                <TableCell>{ task.name }</TableCell>
+                                <TableCell style={{ minWidth: '150px' }}>{ task.name }</TableCell>
                                 <TableCell><p className={ getClassName(task.status) }>
                                     { task.status === null ? '...' : task.status && task.status === 'created' ? 'success' : task.status }
                                 </p></TableCell>
