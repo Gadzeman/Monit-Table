@@ -3,7 +3,6 @@ import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper
 import './GroupsTable.scss'
 import { getGroups } from '../requests/groups.request'
 import { getUsersUrl } from "../config/variables";
-
 import { IGroup } from '../models/groups.model'
 import { TStatus } from "../models/tasks.model";
 
