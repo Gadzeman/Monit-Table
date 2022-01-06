@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper } from "@material-ui/core";
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from "@material-ui/core";
 
 import './GroupsTable.scss'
 import { getGroups } from '../requests/groups.request'
@@ -41,7 +41,7 @@ const GroupsTable: FC = () => {
     }
 
     return (
-        <TableContainer className={'table'} component={Paper}>
+        <TableContainer className={'table'}>
             <Table>
                 <TableHead>
                     <TableRow className={'table__header'}>
@@ -56,10 +56,12 @@ const GroupsTable: FC = () => {
                 <TableBody>
                     {
                         groups.map(group => group.tasks.map(task => (
-                            <TableRow key={ task._id }>
+                            <TableRow key={ task._id } className={'table__body'}>
                                 <TableCell>{ group.name }</TableCell>
                                 <TableCell>{ task.name }</TableCell>
-                                <TableCell><p className={getClassName(task.status)}>{ task.status === null ? '...' : task.status }</p></TableCell>
+                                <TableCell><p className={getClassName(task.status)}>
+                                    { task.status === null ? '...' : task.status && task.status === 'created' ? 'success' : task.status }
+                                </p></TableCell>
                                 <TableCell>{ task.last_download }</TableCell>
                                 <TableCell>{ task.last_check }</TableCell>
                                 <TableCell>{ task.expected_refresh_date }</TableCell>

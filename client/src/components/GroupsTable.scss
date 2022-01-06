@@ -1,16 +1,15 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .table {
   margin-top: 30px;
   max-width: 1200px;
   &__header {
-    background: #093460;
+    background: #0c0900;
     th {
-      color: white;
+      color: #e1c676;
+    }
+  }
+  &__body {
+    td {
+      color: #e1c676;
     }
   }
   &__task {
@@ -18,9 +17,10 @@
       &__style {
         text-align: center;
         width: 120px;
-        padding: 3px 0;
+        padding: 5px 0;
         border-radius: 5px;
         font-weight: bold;
+        cursor: pointer;
       }
       &__created {
         color: green;
