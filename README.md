@@ -1,5 +1,5 @@
 #Run app
-1. open 'my-table' folder
+1. open 'monit-table' folder
 2. console: docker build ./api/ -t api
 3. console: docker build ./client/ -t client
 4. console: docker images
