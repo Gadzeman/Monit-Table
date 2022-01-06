@@ -59,7 +59,7 @@ const GroupsTable: FC = () => {
                             <TableRow key={ task._id } className={'table__body'}>
                                 <TableCell>{ group.name }</TableCell>
                                 <TableCell>{ task.name }</TableCell>
-                                <TableCell><p className={getClassName(task.status)}>
+                                <TableCell><p className={ getClassName(task.status) }>
                                     { task.status === null ? '...' : task.status && task.status === 'created' ? 'success' : task.status }
                                 </p></TableCell>
                                 <TableCell>{ task.last_download }</TableCell>
