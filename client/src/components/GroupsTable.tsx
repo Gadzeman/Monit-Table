@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from "@material-ui/core";
 
 import './GroupsTable.scss'
@@ -52,11 +52,11 @@ const GroupsTable: FC = () => {
                                 <TableCell>{ group.name }</TableCell>
                                 <TableCell style={{ minWidth: '150px' }}>{ task.name }</TableCell>
                                 <TableCell><p className={ getClassName(task.status) }>
-                                    { task.status === null ? '...' : task.status && task.status === 'created' ? 'success' : task.status }
+                                    { task.status === 'created' ? 'success' : task.status }
                                 </p></TableCell>
                                 <TableCell>{ task.last_download }</TableCell>
-                                <TableCell>{ task.last_check }</TableCell>
-                                <TableCell>{ task.expected_refresh_date }</TableCell>
+                                <TableCell>{ task.last_check === null ? '...' : task.last_check }</TableCell>
+                                <TableCell>{ task.expected_refresh_date === null ? '...' : task.expected_refresh_date }</TableCell>
                             </TableRow>
                         )))
                     }
