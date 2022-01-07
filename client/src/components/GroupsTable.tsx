@@ -19,13 +19,6 @@ const GroupsTable: FC = () => {
 
     const getClassName = (status: TStatus) => {
         let statusType: TStatus
-
-        // if (status === 'created') {
-        //     statusType = 'created'
-        // }
-        // if (status === 'failed') {
-        //     statusType = 'failed'
-        // }
         switch (status) {
             case "created":
                 statusType = 'created'
@@ -36,7 +29,6 @@ const GroupsTable: FC = () => {
             default:
                 statusType = 'creating'
         }
-
         return `table__task__status__${ statusType } table__task__status__style`
     }
 
