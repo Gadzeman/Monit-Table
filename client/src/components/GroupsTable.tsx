@@ -18,6 +18,7 @@ const GroupsTable: FC = () => {
     }, [])
 
     const getClassName = (status: TStatus) => {
+        const className = 'table__task__status__'
         let statusType: TStatus
         switch (status) {
             case "created":
@@ -29,7 +30,7 @@ const GroupsTable: FC = () => {
             default:
                 statusType = 'creating'
         }
-        return `table__task__status__${ statusType } table__task__status__style`
+        return `${ className + statusType } ${ className + 'style' }`
     }
 
     return (
