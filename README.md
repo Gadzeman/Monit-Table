@@ -1,10 +1,10 @@
 #Run app
 1. open 'monit-table' folder
-2. console: docker build ./api/ -t api
-3. console: docker build ./client/ -t client
-4. find out image id: docker images
-5. console: docker run -d -p 8000:8000 <api image id>
-6. console: docker run -d -p 3000:3000 <client image id>
+2. docker build ./api/ -t api
+3. docker build ./client/ -t client
+4. docker images (images id)
+5. docker run -d -p 8000:8000 <api image id>
+6. docker run -d -p 3000:3000 <client image id>
 7. http://localhost:3000
-8. console: docker ps
-9. console: docker stop <container id>
+8. docker ps
+9. docker stop <container id or name>
