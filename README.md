@@ -1,6 +1,7 @@
 #Run app
 1. open monit-table folder
-2. docker-compose up
+2. type in the console: docker-compose up
+3. http://localhost:3000
 
 #Stop app
-1. ctrl + c
+1. press: ctrl + c
