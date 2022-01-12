@@ -1,22 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from "@material-ui/core";
 
-import './GroupsTable.scss'
-import { getGroups } from '../requests/groups.request'
-import { getUsersUrl } from "../config/variables";
-import { IGroup } from '../models/groups.model'
+import './Groups.scss'
 import { TStatus } from "../models/tasks.model";
+import { GroupsTableProps } from "../models/props.model";
 
-const GroupsTable: FC = () => {
-    const [groups, setGroups] = useState<IGroup[]>([])
-    const getGroupsData = async () => {
-        const groups = await getGroups(getUsersUrl)
-        setGroups(groups)
-    }
-    useEffect(() => {
-        getGroupsData()
-    }, [])
-
+const GroupsTable: FC<GroupsTableProps> = ({ selectedGroup, filteredGroup }) => {
     const getClassName = (status: TStatus) => {
         const className = 'table__task__status__'
         let statusType: TStatus
@@ -35,11 +24,14 @@ const GroupsTable: FC = () => {
 
     return (
         <>
+            <p style={{ width: '40%', borderBottom: 'white solid 1px', textAlign: 'center' }}>
+                { selectedGroup === '' ? 'All' : selectedGroup }
+            </p>
             <TableContainer className={'table'}>
                 <Table style={{ minWidth: '940px' }}>
                     <TableHead>
                         <TableRow className={'table__header'}>
-                            <TableCell>Group</TableCell>
+                            { selectedGroup === '' && <TableCell>Group</TableCell> }
                             <TableCell>Task</TableCell>
                             <TableCell>Status</TableCell>
                             <TableCell>Last Download</TableCell>
@@ -49,10 +41,10 @@ const GroupsTable: FC = () => {
                     </TableHead>
                     <TableBody>
                         {
-                            groups.map(group => group.tasks.map(task => (
+                            filteredGroup.map(group => group.tasks.map(task => (
                                 <TableRow key={ task._id } className={'table__body'}>
-                                    <TableCell>{ group.name }</TableCell>
-                                    <TableCell style={{ minWidth: '100px', maxWidth: '200px' }}>{ task.name }</TableCell>
+                                    { selectedGroup === '' && <TableCell>{ group.name }</TableCell> }
+                                    <TableCell style={{ minWidth: '100px', width: '200px' }}>{ task.name }</TableCell>
                                     <TableCell><p className={ getClassName(task.status) }>
                                         { task.status === 'created' ? 'success' : task.status }
                                     </p></TableCell>
