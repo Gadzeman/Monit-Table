@@ -34,36 +34,38 @@ const GroupsTable: FC = () => {
     }
 
     return (
-        <TableContainer className={'table'}>
-            <Table style={{ minWidth: '940px' }}>
-                <TableHead>
-                    <TableRow className={'table__header'}>
-                        <TableCell>Group</TableCell>
-                        <TableCell>Task</TableCell>
-                        <TableCell>Status</TableCell>
-                        <TableCell>Last Download</TableCell>
-                        <TableCell>Last Check</TableCell>
-                        <TableCell>Expected Refresh Date</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {
-                        groups.map(group => group.tasks.map(task => (
-                            <TableRow key={ task._id } className={'table__body'}>
-                                <TableCell>{ group.name }</TableCell>
-                                <TableCell style={{ minWidth: '150px' }}>{ task.name }</TableCell>
-                                <TableCell><p className={ getClassName(task.status) }>
-                                    { task.status === 'created' ? 'success' : task.status }
-                                </p></TableCell>
-                                <TableCell>{ task.last_download }</TableCell>
-                                <TableCell>{ task.last_check === null ? '...' : task.last_check }</TableCell>
-                                <TableCell>{ task.expected_refresh_date === null ? '...' : task.expected_refresh_date }</TableCell>
-                            </TableRow>
-                        )))
-                    }
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <>
+            <TableContainer className={'table'}>
+                <Table style={{ minWidth: '940px' }}>
+                    <TableHead>
+                        <TableRow className={'table__header'}>
+                            <TableCell>Group</TableCell>
+                            <TableCell>Task</TableCell>
+                            <TableCell>Status</TableCell>
+                            <TableCell>Last Download</TableCell>
+                            <TableCell>Last Check</TableCell>
+                            <TableCell>Expected Refresh Date</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            groups.map(group => group.tasks.map(task => (
+                                <TableRow key={ task._id } className={'table__body'}>
+                                    <TableCell>{ group.name }</TableCell>
+                                    <TableCell style={{ minWidth: '100px', maxWidth: '200px' }}>{ task.name }</TableCell>
+                                    <TableCell><p className={ getClassName(task.status) }>
+                                        { task.status === 'created' ? 'success' : task.status }
+                                    </p></TableCell>
+                                    <TableCell>{ task.last_download }</TableCell>
+                                    <TableCell>{ task.last_check === null ? '...' : task.last_check }</TableCell>
+                                    <TableCell>{ task.expected_refresh_date === null ? '...' : task.expected_refresh_date }</TableCell>
+                                </TableRow>
+                            )))
+                        }
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </>
     );
 };
 
