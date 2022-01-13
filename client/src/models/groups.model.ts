@@ -1,8 +1,6 @@
-import { ITask } from './tasks.model'
+import { Items } from './items.model'
 
-export interface IGroup {
-    _id: string,
-    name: string,
-    tasks: ITask[]
+export interface Group {
+    group: string,
+    items: Items[]
 }
-

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start"
+    "start": "PORT=4000 react-scripts start"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",

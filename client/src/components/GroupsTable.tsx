@@ -2,24 +2,19 @@ import React, { FC } from 'react';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from "@material-ui/core";
 
 import './Groups.scss'
-import { TStatus } from "../models/tasks.model";
 import { GroupsTableProps } from "../models/props.model";
 
 const GroupsTable: FC<GroupsTableProps> = ({ selectedGroup, filteredGroup }) => {
-    const getClassName = (status: TStatus) => {
-        const className = 'table__task__status__'
-        let statusType: TStatus
-        switch (status) {
-            case "created":
-                statusType = 'created'
-                break
-            case "failed":
-                statusType = 'failed'
-                break
-            default:
-                statusType = 'creating'
-        }
-        return `${ className + statusType } ${ className + 'style' }`
+    const getTime = (time: number) => {
+        const date = new Date(time * 1000)
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const hours = String(date.getHours()).padStart(2, '0')
+        const minutes = String(date.getMinutes()).padStart(2, '0')
+        const seconds = String(date.getSeconds()).padStart(2, '0')
+        const days = String(date.getDate()).padStart(2, '0')
+        const month = months[date.getMonth()]
+
+        return days + ' ' + month + ' ' + hours + ':' + minutes + ':' + seconds
     }
 
     return (
@@ -32,25 +27,21 @@ const GroupsTable: FC<GroupsTableProps> = ({ selectedGroup, filteredGroup }) => 
                     <TableHead>
                         <TableRow className={'table__header'}>
                             { selectedGroup === '' && <TableCell>Group</TableCell> }
-                            <TableCell>Task</TableCell>
-                            <TableCell>Status</TableCell>
-                            <TableCell>Last Download</TableCell>
-                            <TableCell>Last Check</TableCell>
-                            <TableCell>Expected Refresh Date</TableCell>
+                            <TableCell>Job Name</TableCell>
+                            <TableCell>Last Schedule</TableCell>
+                            <TableCell>Expected Schedule</TableCell>
+                            <TableCell>Duration Millis</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {
-                            filteredGroup.map(group => group.tasks.map(task => (
-                                <TableRow key={ task._id } className={'table__body'}>
-                                    { selectedGroup === '' && <TableCell>{ group.name }</TableCell> }
-                                    <TableCell style={{ minWidth: '100px', width: '200px' }}>{ task.name }</TableCell>
-                                    <TableCell><p className={ getClassName(task.status) }>
-                                        { task.status === 'created' ? 'success' : task.status }
-                                    </p></TableCell>
-                                    <TableCell>{ task.last_download }</TableCell>
-                                    <TableCell>{ task.last_check === null ? '...' : task.last_check }</TableCell>
-                                    <TableCell>{ task.expected_refresh_date === null ? '...' : task.expected_refresh_date }</TableCell>
+                            filteredGroup.map(group => group.items.map(item => (
+                                <TableRow key={ item.job_name } className={'table__body'}>
+                                    { selectedGroup === '' && <TableCell>{ group.group }</TableCell> }
+                                    <TableCell style={{ minWidth: '100px', width: '200px' }}>{ item.job_name }</TableCell>
+                                    <TableCell>{ getTime( parseInt(item.last_schedule) ) }</TableCell>
+                                    <TableCell>{ getTime( parseInt(item.expected_schedule) ) }</TableCell>
+                                    <TableCell>{ item.duration_millis }</TableCell>
                                 </TableRow>
                             )))
                         }

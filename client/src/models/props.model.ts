@@ -1,4 +1,4 @@
-import { IGroup } from "./groups.model";
+import { Group } from "./groups.model";
 
 export interface GroupsNavbarProps {
     groupsName: string[],
@@ -7,6 +7,6 @@ export interface GroupsNavbarProps {
 }
 
 export interface GroupsTableProps {
-    filteredGroup: IGroup[],
+    filteredGroup: Group[],
     selectedGroup: string
 }

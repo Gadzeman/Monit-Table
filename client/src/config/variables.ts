@@ -1,5 +1,5 @@
-const getUsersUrl = 'http://localhost:8000/groups'
+const getGroupsUrl = 'http://0.0.0.0:3000/dev/logs'
 
 export {
-    getUsersUrl
+    getGroupsUrl
 }
