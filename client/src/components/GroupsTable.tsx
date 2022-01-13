@@ -24,7 +24,7 @@ const GroupsTable: FC<GroupsTableProps> = ({ selectedGroup, filteredGroup }) => 
 
     return (
         <>
-            <p style={{ width: '40%', borderBottom: 'white solid 1px', textAlign: 'center' }}>
+            <p style={{ width: '40%', borderBottom: 'white solid 1px', textAlign: 'center', paddingBottom: 10 }}>
                 { selectedGroup === '' ? 'All' : selectedGroup }
             </p>
             <TableContainer className={'table'}>
