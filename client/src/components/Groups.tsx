@@ -42,8 +42,16 @@ const Groups: FC = () => {
                     <h3 style={{ marginTop: 30 }}>Loading...</h3>
                     :
                     <>
-                        <GroupsNavbar groupsName={groupsName} setSelectedGroup={setSelectedGroup} filterGroupByName={filterGroupByName} />
-                        <GroupsTable selectedGroup={selectedGroup} filteredGroup={filteredGroup} />
+                        <GroupsNavbar
+                            groupsName={groupsName}
+                            setSelectedGroup={setSelectedGroup}
+                            filterGroupByName={filterGroupByName}
+                        />
+                        <GroupsTable
+                            groups={groups}
+                            filteredGroup={filteredGroup}
+                            selectedGroup={selectedGroup}
+                        />
                     </>
             }
         </div>

@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
 
 import './Groups.scss'
-import { GroupsNavbarProps } from "../models/props.model";
+
+interface GroupsNavbarProps {
+    groupsName: string[],
+    setSelectedGroup: (name: string) => void,
+    filterGroupByName: (name: string) => void
+}
 
 const GroupsNavbar: FC<GroupsNavbarProps> = ({ groupsName, setSelectedGroup, filterGroupByName }) => {
     const handleGroup = (group: string) => {
@@ -11,7 +16,7 @@ const GroupsNavbar: FC<GroupsNavbarProps> = ({ groupsName, setSelectedGroup, fil
 
     return (
         <div className='navbar'>
-            <p className='navbar__item' onClick={() => handleGroup('')}>All</p>
+            <p className='navbar__item' onClick={() => handleGroup('')}>All Groups</p>
             {
                 groupsName.map(group =>
                     <p className='navbar__item' onClick={() => handleGroup(group)} key={ group }>{ group }</p>

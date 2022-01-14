@@ -6,39 +6,44 @@
 
 // table
 .table {
+  margin-top: 30px;
   max-width: 1200px;
+  background: #0c0900;
+  color: #e1c676;
   &__header {
-    background: #0c0900;
     th {
       color: #e1c676;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
     }
   }
   &__body {
     td {
       color: #e1c676;
+      border: none;
     }
   }
-  &__task {
+  &__item {
     &__status {
       &__style {
         text-align: center;
-        width: 120px;
+        width: 90px;
         padding: 5px;
         border-radius: 5px;
         font-weight: bold;
-        cursor: pointer;
       }
       &__created {
-        color: green;
-        background: #c9efc9;
+        color: #b5ffb5;
+        background: #4c814c;
       }
-      &__creating {
-        color: #ad7100;
-        background: #ffe7c3;
+      &__warning {
+        color: #1f1f04;
+        background: #c29c50;
       }
       &__failed {
-        color: red;
-        background: #ffafaf;
+        color: #ffd8d8;
+        background: #ff5a5a;
       }
     }
   }
