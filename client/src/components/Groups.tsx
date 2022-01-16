@@ -12,6 +12,10 @@ const Groups: FC = () => {
     const [selectedGroup, setSelectedGroup] = useState<string>('')
     const [filteredGroup, setFilteredGroup] = useState<Group[]>([])
 
+    useEffect(() => {
+        getGroupsData()
+    }, [])
+
     const getGroupsData = async () => {
         const groups = await getGroups(getGroupsUrl)
         const groupsName = groups.map(group => group.group)
@@ -20,18 +24,9 @@ const Groups: FC = () => {
         setGroupsName(groupsName)
     }
 
-    useEffect(() => {
-        getGroupsData()
-    }, [])
-
     const filterGroupByName = (name: string) => {
         const filteredGroup = groups.filter(group => group.group === name)
-        if (!name) {
-            setFilteredGroup(groups)
-
-            return
-        }
-        setFilteredGroup(filteredGroup)
+        setFilteredGroup(name ? filteredGroup : groups)
     }
 
     return (
@@ -48,7 +43,6 @@ const Groups: FC = () => {
                             filterGroupByName={filterGroupByName}
                         />
                         <GroupsTable
-                            groups={groups}
                             filteredGroup={filteredGroup}
                             selectedGroup={selectedGroup}
                         />

@@ -16,9 +16,20 @@
       font-weight: bold;
       font-size: 16px;
       border: none;
+      span {
+        color: #e1c676 !important;
+        cursor: pointer;
+      }
+      svg {
+        color: #e1c676 !important;
+      }
     }
   }
   &__body {
+    &__item {
+      width: 300px;
+      min-width: 100px;
+    }
     td {
       color: #e1c676;
       border: none;
@@ -39,7 +50,7 @@
       }
       &__warning {
         color: #1f1f04;
-        background: #c29c50;
+        background: #ffae00;
       }
       &__failed {
         color: #ffd8d8;
