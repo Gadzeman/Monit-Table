@@ -28,6 +28,7 @@ const Groups: FC = () => {
         const filteredGroup = groups.filter(group => group.group === name)
         setFilteredGroup(name ? filteredGroup : groups)
     }
+    console.log(groups)
 
     return (
         <div className='groups'>

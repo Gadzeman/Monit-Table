@@ -12,5 +12,3 @@ services:
       - '4000:4000'
     command: npm start
     restart: always
-    depends_on:
-      - api

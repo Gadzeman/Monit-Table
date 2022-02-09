@@ -48,8 +48,8 @@ const GroupsTable: FC<GroupsTableProps> = ({ selectedGroup, filteredGroup}) => {
         const className = 'table__item__status__'
         let statusType: StatusType
         switch (status) {
-            case "created":
-                statusType = 'created'
+            case "success":
+                statusType = 'success'
                 break
             case "failed":
                 statusType = 'failed'
@@ -95,11 +95,13 @@ const GroupsTable: FC<GroupsTableProps> = ({ selectedGroup, filteredGroup}) => {
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
                 <TableContainer className={'table'}>
-                    <Table style={{ minWidth: '940px' }}>
+                    <Table style={{ minWidth: '1045px' }}>
                         <TableHead>
                             <TableRow className={'table__header'}>
                                 { selectedGroup === '' && <TableCell>Group</TableCell> }
-                                <TableCell>Status</TableCell>
+                                <TableCell>
+                                    Status
+                                </TableCell>
                                 <TableCell><TableSortLabel direction={orderABC ? 'asc' : 'desc'} onClick={() => sortNamesForGroup()}>
                                     Job Name
                                 </TableSortLabel></TableCell>
@@ -109,6 +111,9 @@ const GroupsTable: FC<GroupsTableProps> = ({ selectedGroup, filteredGroup}) => {
                                 <TableCell><TableSortLabel direction={orderTime ? 'asc' : 'desc'} onClick={() => sortItemsForGroup('expected_schedule')}>
                                     Expected Schedule
                                 </TableSortLabel></TableCell>
+                                <TableCell>
+                                    Previous Schedule
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -123,6 +128,7 @@ const GroupsTable: FC<GroupsTableProps> = ({ selectedGroup, filteredGroup}) => {
                                         <TableCell className='table__body__item'>{ item.job_name }</TableCell>
                                         <TableCell className='table__body__item'>{ getTime( item.last_schedule) }</TableCell>
                                         <TableCell className='table__body__item'>{ getTime( item.expected_schedule) }</TableCell>
+                                        <TableCell className='table__body__item'>{ item.previous_schedule ? getTime( item.previous_schedule ) : '' }</TableCell>
                                     </StyledTableRow>
                                 )))
                             }
