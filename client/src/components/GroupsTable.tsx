@@ -13,7 +13,7 @@ import {
 
 import './Groups.scss';
 import { Group } from '../models/groups.model';
-import { ScheduleType, StatusType } from '../models/items.model';
+import { ScheduleType } from '../models/items.model';
 
 interface GroupsTableProps {
   filteredGroup: Group[];
@@ -34,37 +34,6 @@ const GroupsTable: FC<GroupsTableProps> = ({
     const [items] = filteredGroup.map((group) => group.items.length);
     setGroupsCount(items);
   }, [filteredGroup]);
-
-  const getTime = (timestamp: string) => {
-    const time = new Date(timestamp).toLocaleTimeString('en-US', {
-      timeZone: 'America/New_York',
-    });
-    const date = new Date(timestamp).toLocaleDateString('en-US', {
-      timeZone: 'America/New_York',
-    });
-
-    return date + ' ' + time;
-  };
-
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const StyledTableRow = styled(TableRow)(() => ({
-    '&:nth-of-type(odd)': {
-      backgroundColor: '#1f1f04',
-    },
-  }));
 
   function sortNamesForGroup() {
     filteredGroup.map((group) =>
@@ -87,6 +56,37 @@ const GroupsTable: FC<GroupsTableProps> = ({
     );
     setOrderTime(!orderTime);
   }
+
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number,
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const getTime = (timestamp: string) => {
+    const time = new Date(timestamp).toLocaleTimeString('en-US', {
+      timeZone: 'America/New_York',
+    });
+    const date = new Date(timestamp).toLocaleDateString('en-US', {
+      timeZone: 'America/New_York',
+    });
+
+    return date + ' ' + time;
+  };
+
+  const StyledTableRow = styled(TableRow)(() => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: '#1f1f04',
+    },
+  }));
 
   const getDetermineStatus = (last: string, prev: string) => {
     const className = 'table__item__status__';
