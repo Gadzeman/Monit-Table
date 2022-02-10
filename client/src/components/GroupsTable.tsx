@@ -36,8 +36,12 @@ const GroupsTable: FC<GroupsTableProps> = ({
   }, [filteredGroup]);
 
   const getTime = (timestamp: string) => {
-    const time = new Date(timestamp).toLocaleTimeString('en-US');
-    const date = new Date(timestamp).toLocaleDateString('en-US');
+    const time = new Date(timestamp).toLocaleTimeString('en-US', {
+      timeZone: 'America/New_York',
+    });
+    const date = new Date(timestamp).toLocaleDateString('en-US', {
+      timeZone: 'America/New_York',
+    });
 
     return date + ' ' + time;
   };
@@ -73,46 +77,28 @@ const GroupsTable: FC<GroupsTableProps> = ({
     setOrderABC(!orderABC);
   }
 
-  // function sortItemsForGroup(schedule: ScheduleType = 'last_schedule') {
-  //   filteredGroup.map((group) =>
-  //     group.items.sort((a, b) =>
-  //       orderTime
-  //         ? new Date(
-  //             schedule !== 'last_schedule'
-  //               ? b.expected_schedule
-  //               : b.last_schedule,
-  //           ).getTime() -
-  //           new Date(
-  //             schedule !== 'last_schedule'
-  //               ? a.expected_schedule
-  //               : a.last_schedule,
-  //           ).getTime()
-  //         : new Date(
-  //             schedule !== 'last_schedule'
-  //               ? a.expected_schedule
-  //               : a.last_schedule,
-  //           ).getTime() -
-  //           new Date(
-  //             schedule !== 'last_schedule'
-  //               ? b.expected_schedule
-  //               : b.last_schedule,
-  //           ).getTime(),
-  //     ),
-  //   );
-  //   setOrderTime(!orderTime);
-  // }
+  function sortItemsForGroup(schedule: ScheduleType = 'last_schedule') {
+    filteredGroup.map((group) =>
+      group.items.sort((a, b) =>
+        orderTime
+          ? new Date(b[schedule]).getTime() - new Date(a[schedule]).getTime()
+          : new Date(a[schedule]).getTime() - new Date(b[schedule]).getTime(),
+      ),
+    );
+    setOrderTime(!orderTime);
+  }
 
-  const getDetermineStatus = (last: string, expected: string) => {
+  const getDetermineStatus = (last: string, prev: string) => {
     const className = 'table__item__status__';
     const style = 'table__item__status__style';
 
-    if (last === expected) {
+    if (last <= prev || Number(last) - Number(prev) < 1000 || !prev) {
       return {
         className: `${className + 'success'} ${style}`,
         statusName: 'Success',
       };
     }
-    if (Number(expected) - Number(last) <= 500000) {
+    if (Number(last) - Number(prev) < 3600000) {
       return {
         className: `${className + 'warning'} ${style}`,
         statusName: 'Warning',
@@ -165,7 +151,7 @@ const GroupsTable: FC<GroupsTableProps> = ({
               <TableCell>
                 <TableSortLabel
                   direction={orderTime ? 'asc' : 'desc'}
-                  // onClick={() => sortItemsForGroup()}
+                  onClick={() => sortItemsForGroup()}
                 >
                   Last Schedule
                 </TableSortLabel>
@@ -173,14 +159,17 @@ const GroupsTable: FC<GroupsTableProps> = ({
               <TableCell>
                 <TableSortLabel
                   direction={orderTime ? 'asc' : 'desc'}
-                  // onClick={() => sortItemsForGroup('expected_schedule')}
+                  onClick={() => sortItemsForGroup('previous_schedule')}
                 >
-                  Expected Schedule
+                  Previous Schedule
                 </TableSortLabel>
               </TableCell>
               <TableCell>
-                <TableSortLabel direction={orderTime ? 'asc' : 'desc'}>
-                  Previous Schedule
+                <TableSortLabel
+                  direction={orderTime ? 'asc' : 'desc'}
+                  onClick={() => sortItemsForGroup('expected_schedule')}
+                >
+                  Expected Schedule
                 </TableSortLabel>
               </TableCell>
             </TableRow>
@@ -199,14 +188,14 @@ const GroupsTable: FC<GroupsTableProps> = ({
                         className={
                           getDetermineStatus(
                             item.last_schedule,
-                            item.expected_schedule,
+                            item.previous_schedule,
                           ).className
                         }
                       >
                         {
                           getDetermineStatus(
                             item.last_schedule,
-                            item.expected_schedule,
+                            item.previous_schedule,
                           ).statusName
                         }
                       </p>
@@ -218,12 +207,12 @@ const GroupsTable: FC<GroupsTableProps> = ({
                       {getTime(item.last_schedule)}
                     </TableCell>
                     <TableCell className="table__body__item">
-                      {getTime(item.expected_schedule)}
-                    </TableCell>
-                    <TableCell className="table__body__item">
                       {item.previous_schedule
                         ? getTime(item.previous_schedule)
                         : ''}
+                    </TableCell>
+                    <TableCell className="table__body__item">
+                      {getTime(item.expected_schedule)}
                     </TableCell>
                   </StyledTableRow>
                 )),

@@ -4,7 +4,7 @@ import GroupsNavbar from './GroupsNavbar';
 import GroupsTable from './GroupsTable';
 import { Group } from '../models/groups.model';
 import { getGroups } from '../requests/groups.request';
-import { getGroupsUrl } from '../config/variables';
+import { getGroupsApi } from '../config/variables';
 
 const Groups: FC = () => {
   const [groups, setGroups] = useState<Group[]>([]);
@@ -17,7 +17,7 @@ const Groups: FC = () => {
   }, []);
 
   const getGroupsData = async () => {
-    const groups = await getGroups(getGroupsUrl);
+    const groups = await getGroups(getGroupsApi);
     const groupsName = groups.map((group) => group.group);
     setGroups(groups);
     setFilteredGroup(groups);
@@ -28,7 +28,6 @@ const Groups: FC = () => {
     const filteredGroup = groups.filter((group) => group.group === name);
     setFilteredGroup(name ? filteredGroup : groups);
   };
-  console.log(groups);
 
   return (
     <div className="groups">
