@@ -82,12 +82,6 @@ const GroupsTable: FC<GroupsTableProps> = ({
     return date + ' ' + time;
   };
 
-  const StyledTableRow = styled(TableRow)(() => ({
-    '&:nth-of-type(odd)': {
-      backgroundColor: '#1f1f04',
-    },
-  }));
-
   const getDetermineStatus = (last: string, prev: string) => {
     const className = 'table__item__status__';
     const style = 'table__item__status__style';
@@ -109,6 +103,12 @@ const GroupsTable: FC<GroupsTableProps> = ({
       statusName: 'Failed',
     };
   };
+
+  const StyledTableRow = styled(TableRow)(() => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: '#1f1f04',
+    },
+  }));
 
   return (
     <>

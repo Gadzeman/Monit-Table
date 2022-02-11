@@ -10,6 +10,7 @@ const Groups: FC = () => {
   const [groups, setGroups] = useState<Group[]>([]);
   const [groupsName, setGroupsName] = useState<string[]>([]);
   const [selectedGroup, setSelectedGroup] = useState<string>('');
+  const [serverError, setServerError] = useState<boolean>(false);
   const [filteredGroup, setFilteredGroup] = useState<Group[]>([]);
 
   useEffect(() => {
@@ -17,11 +18,15 @@ const Groups: FC = () => {
   }, []);
 
   const getGroupsData = async () => {
-    const groups = await getGroups(getGroupsApi);
-    const groupsName = groups.map((group) => group.group);
-    setGroups(groups);
-    setFilteredGroup(groups);
-    setGroupsName(groupsName);
+    try {
+      const groups = await getGroups(getGroupsApi);
+      const groupsName = groups.map((group) => group.group);
+      setGroups(groups);
+      setFilteredGroup(groups);
+      setGroupsName(groupsName);
+    } catch (e) {
+      setServerError(true);
+    }
   };
 
   const filterGroupByName = (name: string) => {
@@ -31,7 +36,9 @@ const Groups: FC = () => {
 
   return (
     <div className="groups">
-      {groups.length === 0 ? (
+      {serverError ? (
+        <h3 style={{ marginTop: 30 }}>500 Internal Server Error</h3>
+      ) : groups.length === 0 ? (
         <h3 style={{ marginTop: 30 }}>Loading...</h3>
       ) : (
         <>
