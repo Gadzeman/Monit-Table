@@ -19,13 +19,13 @@ const GroupsNavbar: FC<GroupsNavbarProps> = ({
   };
 
   return (
-    <div className="navbar">
-      <p className="navbar__item" onClick={() => handleGroup('')}>
+    <div className="groups__navbar">
+      <p className="groups__navbar__item" onClick={() => handleGroup('')}>
         All Groups
       </p>
       {groupsName.map((group) => (
         <p
-          className="navbar__item"
+          className="groups__navbar__item"
           onClick={() => handleGroup(group)}
           key={group}
         >

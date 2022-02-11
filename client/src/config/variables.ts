@@ -1,3 +1,3 @@
-const getGroupsApi = 'http://0.0.0.0:3000/dev/logs';
+const getGroupsApi = process.env.REACT_APP_GET_GROUPS_URL;
 
 export { getGroupsApi };

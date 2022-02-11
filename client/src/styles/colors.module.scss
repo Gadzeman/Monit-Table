@@ -1,0 +1,15 @@
+//General
+$general-font: #e1c676;
+$general-background: #0c0900;
+
+//Status
+$success-font: #b5ffb5;
+$success-background: #4c814c;
+$warning-font: #1f1f04;
+$warning-background: #ffae00;
+$failed-font: #ffd8d8;
+$failed-background: #ff5a5a;
+
+:export {
+  generalFont: $general-font
+}

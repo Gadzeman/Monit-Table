@@ -5,6 +5,8 @@ services:
   client:
     container_name: client
     build: ./client
+    env_file:
+      - ./client/.env
     volumes:
       - ./client:/usr/app
       - /usr/app/node_modules

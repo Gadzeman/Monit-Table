@@ -12,8 +12,9 @@ import {
 } from '@material-ui/core';
 
 import './Groups.scss';
-import { Group } from '../models/groups.model';
-import { ScheduleType } from '../models/items.model';
+import colors from '../../styles/colors.module.scss';
+import { Group } from '../../models/group.model';
+import { ScheduleType } from '../../types/schedule.type';
 
 interface GroupsTableProps {
   filteredGroup: Group[];
@@ -71,7 +72,7 @@ const GroupsTable: FC<GroupsTableProps> = ({
     setPage(0);
   };
 
-  const getTime = (timestamp: string) => {
+  const getTime = (timestamp: number) => {
     const time = new Date(timestamp).toLocaleTimeString('en-US', {
       timeZone: 'America/New_York',
     });
@@ -82,9 +83,9 @@ const GroupsTable: FC<GroupsTableProps> = ({
     return date + ' ' + time;
   };
 
-  const getDetermineStatus = (last: string, prev: string) => {
-    const className = 'table__item__status__';
-    const style = 'table__item__status__style';
+  const getDetermineStatus = (last: number, prev: number) => {
+    const className = 'groups__table__item__status__';
+    const style = 'groups__table__item__status__style';
 
     if (last <= prev || Number(last) - Number(prev) < 1000 || !prev) {
       return {
@@ -125,7 +126,7 @@ const GroupsTable: FC<GroupsTableProps> = ({
         {selectedGroup === '' ? 'All Groups' : selectedGroup}
       </p>
       <TablePagination
-        style={{ color: '#e1c676' }}
+        style={{ color: colors.generalFont }}
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={groupsCount}
@@ -134,10 +135,10 @@ const GroupsTable: FC<GroupsTableProps> = ({
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      <TableContainer className={'table'}>
+      <TableContainer className={'groups__table'}>
         <Table style={{ minWidth: '1045px' }}>
           <TableHead>
-            <TableRow className={'table__header'}>
+            <TableRow className={'groups__table__header'}>
               {selectedGroup === '' && <TableCell>Group</TableCell>}
               <TableCell>Status</TableCell>
               <TableCell>
@@ -179,7 +180,10 @@ const GroupsTable: FC<GroupsTableProps> = ({
               group.items
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((item) => (
-                  <StyledTableRow key={item.job_name} className={'table__body'}>
+                  <StyledTableRow
+                    key={item.job_name}
+                    className={'groups__table__body'}
+                  >
                     {selectedGroup === '' && (
                       <TableCell>{group.group}</TableCell>
                     )}
@@ -200,18 +204,18 @@ const GroupsTable: FC<GroupsTableProps> = ({
                         }
                       </p>
                     </TableCell>
-                    <TableCell className="table__body__item">
+                    <TableCell className="groups__table__body__item">
                       {item.job_name}
                     </TableCell>
-                    <TableCell className="table__body__item">
+                    <TableCell className="groups__table__body__item">
                       {getTime(item.last_schedule)}
                     </TableCell>
-                    <TableCell className="table__body__item">
+                    <TableCell className="groups__table__body__item">
                       {item.previous_schedule
                         ? getTime(item.previous_schedule)
                         : ''}
                     </TableCell>
-                    <TableCell className="table__body__item">
+                    <TableCell className="groups__table__body__item">
                       {getTime(item.expected_schedule)}
                     </TableCell>
                   </StyledTableRow>

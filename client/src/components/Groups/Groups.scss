@@ -1,3 +1,5 @@
+@import '../../styles/colors.module';
+
 .groups {
   display: flex;
   align-items: center;
@@ -5,23 +7,23 @@
 }
 
 // table
-.table {
+.groups__table {
   margin-top: 30px;
   max-width: 1200px;
-  background: #0c0900;
-  color: #e1c676;
+  background: $general-background;
+  color: $general-font;
   &__header {
     th {
-      color: #e1c676;
+      color: $general-font;
       font-weight: bold;
       font-size: 16px;
       border: none;
       span {
-        color: #e1c676 !important;
+        color: $general-font !important;
         cursor: pointer;
       }
       svg {
-        color: #e1c676 !important;
+        color: $general-font !important;
       }
     }
   }
@@ -31,7 +33,7 @@
       min-width: 100px;
     }
     td {
-      color: #e1c676;
+      color: $general-font;
       border: none;
     }
   }
@@ -45,23 +47,23 @@
         font-weight: bold;
       }
       &__success {
-        color: #b5ffb5;
-        background: #4c814c;
+        color: $success-font;
+        background: $success-background;
       }
       &__warning {
-        color: #1f1f04;
-        background: #ffae00;
+        color: $warning-font;
+        background: $warning-background;
       }
       &__failed {
-        color: #ffd8d8;
-        background: #ff5a5a;
+        color: $failed-font;
+        background: $failed-background;
       }
     }
   }
 }
 
 // navbar
-.navbar {
+.groups__navbar {
   width: 100%;
   height: 60px;
   display: flex;

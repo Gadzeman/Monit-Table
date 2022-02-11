@@ -2,9 +2,9 @@ import React, { FC, useEffect, useState } from 'react';
 
 import GroupsNavbar from './GroupsNavbar';
 import GroupsTable from './GroupsTable';
-import { Group } from '../models/groups.model';
-import { getGroups } from '../requests/groups.request';
-import { getGroupsApi } from '../config/variables';
+import { Group } from '../../models/group.model';
+import { getGroups } from '../../requests/groups.request';
+import { getGroupsApi } from '../../config/variables';
 
 const Groups: FC = () => {
   const [groups, setGroups] = useState<Group[]>([]);

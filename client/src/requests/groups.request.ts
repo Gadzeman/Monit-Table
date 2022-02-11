@@ -1,12 +1,8 @@
 import axios from 'axios';
-import { Group } from '../models/groups.model';
+import { Group } from '../models/group.model';
 
-export async function getGroups(url: string): Promise<Group[]> {
-  try {
-    const { data } = await axios.get(url);
+export async function getGroups(url: any): Promise<Group[]> {
+  const { data } = await axios.get(url);
 
-    return data.data;
-  } catch (e) {
-    throw e;
-  }
+  return data.data;
 }
